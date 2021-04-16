@@ -1,4 +1,9 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import { RootState} from '@Types';
+// type RootState = import("../store/reducer").RootState;
+import {AppState} from '../store/reducer';
+import state from '../store/reducer';
 import one_bc from '../playingCards/black clubs/1bc.png';
 import two_bc from '../playingCards/black clubs/2bc.png';
 import three_bc from '../playingCards/black cClubs/3bc.png';
@@ -44,10 +49,41 @@ import nine_rh from '../playingCards/red hearts/9rh.png';
 import ten_rh from '../playingCards/red hearts/10rh.png';
 
 const Image: React.FC = () => {
+    const dispatch = useDispatch();
+    const cardNumber=useSelector((state: AppState)=>(state.lastPlayedCard!==null)?state.lastPlayedCard.number:null);
+    const cardSuit=useSelector((state:AppState)=>(state.lastPlayedCard!==null)?state.lastPlayedCard.suit:null);
     return (
         <>
-            <img src={nine_rh} alt="alt house" height={500} width={300}/>
+            <div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+            </div>
+            <div>
+                <img src={nine_rh} alt="alt house" height={500} width={300} />
+                <p>{cardNumber} and {cardSuit}</p>
+            </div>
 
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <button onClick={() => dispatch({ type: 'GAMESTARTED' })}>Start Game</button>
+            {/* <div>
+                <button onClick={() => dispatch({ type: 'LOWERCLICKED' })}>Lower</button>
+                <button onClick={() => dispatch({ type: 'HIGHERCLICKED' })}>Higher</button>
+            </div> */}
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <p>Score: </p>
         </>
     )
 }
