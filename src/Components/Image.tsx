@@ -52,6 +52,9 @@ const Image: React.FC = () => {
     const dispatch = useDispatch();
     const cardNumber=useSelector((state: AppState)=>(state.lastPlayedCard!==null)?state.lastPlayedCard.number:null);
     const cardSuit=useSelector((state:AppState)=>(state.lastPlayedCard!==null)?state.lastPlayedCard.suit:null);
+    const numberOfPlyedCards=useSelector((state:AppState)=>(state.playedCards!==null)?state.playedCards.length:null);
+    const score=useSelector((state: AppState)=>(state.score!==null)?state.score:null);
+
     return (
         <>
             <div>
@@ -67,7 +70,7 @@ const Image: React.FC = () => {
             </div>
             <div>
                 <img src={nine_rh} alt="alt house" height={500} width={300} />
-                <p>{cardNumber} and {cardSuit}</p>
+                <p>{cardNumber} and {cardSuit} and {numberOfPlyedCards} and {score}</p>
             </div>
 
             <br></br>

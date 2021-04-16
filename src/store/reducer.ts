@@ -3,7 +3,7 @@ class CardGame {
     suit: String = "";
     number: number = 0;
     played: boolean = false;
-    playedCards: Array<CardGame>=new Array<CardGame>();
+    playedCards: Array<CardGame> = new Array<CardGame>();
     constructor(suit?: String, number?: number) {
         if (number !== undefined) {
             if (suit === 'spades' || suit === 'hearts' || suit === 'diamonds' || suit === 'clubs') {
@@ -33,7 +33,7 @@ class CardGame {
         let rand = Math.floor((Math.random() * (array.length - 1)));  // returns number [0-9] for indexes
         let card = array[rand];
         this.playedCards.push(card);
-        array.slice(rand,1);
+        array.splice(rand, 1);
         return array;
     }
 }
@@ -53,8 +53,8 @@ const reducer = (state = initState, action: PayloadAction<number>) => {
             ...state,
             cards: obj.playCards(state.cards),
             playedCards: obj.playedCards,
-            lastPlayedCard: obj.playedCards[obj.playedCards.length-1],
-            score:0            
+            lastPlayedCard: obj.playedCards[obj.playedCards.length - 1],
+            score: state.score + 1
         }
         // case 'LOWERCLICKED': return {
         //     ...state,
@@ -74,5 +74,5 @@ const reducer = (state = initState, action: PayloadAction<number>) => {
         default: return state;
     }
 };
-export type AppState=ReturnType<typeof reducer>
+export type AppState = ReturnType<typeof reducer>
 export default reducer;
