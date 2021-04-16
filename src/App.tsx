@@ -1,9 +1,10 @@
 import './App.css';
+import Image from './Components/Image';
 
 function App(): React.ReactNode {
   return (
     <div className="App">
-
+      <Image/>
     </div>
   );
 }

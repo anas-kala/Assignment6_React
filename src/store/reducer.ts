@@ -1,10 +1,11 @@
+import { PayloadAction } from '@reduxjs/toolkit'
 class CardGame {
     suit: String = "";
     number: number = 0;
     played: boolean = false;
     constructor(suit?: String, number?: number) {
-        if (number != undefined) {
-            if (suit == 'spades' || suit == 'hearts' || suit == 'diamonds' || suit == 'clubs') {
+        if (number !== undefined) {
+            if (suit === 'spades' || suit === 'hearts' || suit === 'diamonds' || suit === 'clubs') {
                 if (number < 11 && number > 0) {
                     this.suit = suit;
                     this.number = number;
@@ -42,7 +43,7 @@ const initState = {
     score: 0
 }
 
-const reducer = (state = initState, action) => {
+const reducer = (state = initState, action: PayloadAction<number>) => {
     switch (action.type) {
         // case 'NEWMESSAGE': return {
         //     ...state,
