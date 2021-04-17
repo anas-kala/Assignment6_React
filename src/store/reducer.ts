@@ -44,25 +44,33 @@ const initState = {
     cards: obj.instaitiateCards(),
     lastPlayedCard: null,
     playedCards: null,
-    score: 0
+    score: 0,
+    showGameBoard: false,
+    showStartButton:true
+
 }
 
 const reducer = (state = initState, action: PayloadAction<number>) => {
     switch (action.type) {
+        case 'STARTCLICKED': return{
+            ...state,
+            showGameBoard: true,
+            showStartButton:false
+        }
         case 'GAMESTARTED': return {
             ...state,
             cards: obj.playCards(state.cards),
             playedCards: obj.playedCards,
             lastPlayedCard: obj.playedCards[obj.playedCards.length - 1],
-            score: state.score + 1
+            score: 0,    //state.score + 1
         }
-        // case 'LOWERCLICKED': return {
-        //     ...state,
-        //     cards: obj.playCards(state.cards),
-        //     playedCards: ,
-        //     lastPlayedCard: obj.playedCards[obj.playedCards.length-1],
-        //     score:0   
-        // }
+        case 'LOWERCLICKED': return {
+            ...state,
+            cards: obj.playCards(state.cards),
+            playedCards: state.playedCards,
+            lastPlayedCard: obj.playedCards[obj.playedCards.length-1],
+            score:0   
+        }
         // case 'HIGHERCLICKED': return {
         //     ...state,
         //     cards: obj.playCards(state.cards),
