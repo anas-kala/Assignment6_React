@@ -57,6 +57,11 @@ const reducer = (state = initState, action: PayloadAction<number>) => {
             showGameBoard: true,
             showStartButton:false
         }
+        case 'CARDSFINISHED': return{
+            ...state,
+            showGameBoard: false,
+            showStartButton:false
+        }
         case 'GAMESTARTED': return {
             ...state,
             cards: obj.playCards(state.cards),

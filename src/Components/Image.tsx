@@ -73,7 +73,9 @@ const Image: React.FC = () => {
 
     function lowerClicked() {
         dispatch({ type: 'GAMESTARTED' });
-        
+        if(numberOfPlyedCards==40){
+            dispatch({ type: 'CARDSFINISHED'});
+        }
         if (cardNumber === 1) {
             if (cardSuit == 'spades') {
                 setSource(one_bs);
