@@ -66,25 +66,20 @@ const Image: React.FC = () => {
     const [source, setSource] = useState(one_bc);    
     const dispatch = useDispatch();
     const cardNumber = useSelector((state: AppState) => (state.lastPlayedCard !== null) ? state.lastPlayedCard.number : null);
+    // the local state of playedCard solves the problem of asynchronous calling.
     const [playedCard,setPlayedCard]=useState(cardNumber);
     const cardSuit = useSelector((state: AppState) => (state.lastPlayedCard !== null) ? state.lastPlayedCard.suit : null);
     const numberOfPlyedCards = useSelector((state: AppState) => (state.playedCards !== null) ? state.playedCards.length : null);
     const score = useSelector((state: AppState) => (state.score !== null) ? state.score : null);
     // const lastPlayedCard=useSelector((state:AppState)=>(state.lastPlayedCard!=null?state.lastPlayedCard:null));
 
-    function settingCardNumber(a:number|null){
-        if(cardNumber!==null)
-        return cardNumber;
-        else
-        return 0;
-    }
+
     function lowerClicked() {
         dispatch({ type: 'GAMESTARTED' });
         if(numberOfPlyedCards==40){
             dispatch({ type: 'CARDSFINISHED'});
         }
-        let temp=cardNumber;
-        setPlayedCard(temp);
+        setPlayedCard(cardNumber);
         if (cardNumber === 1) {
             if (cardSuit == 'spades') {
                 setSource(one_bs);
@@ -189,7 +184,6 @@ const Image: React.FC = () => {
         if(playedCard!==null && cardNumber!==null){
             console.log(playedCard+"  "+cardNumber);
             if(playedCard > cardNumber){
-            console.log("aaa");
                 dispatch({ type: 'INCREASESCORE' });
             }
         }
