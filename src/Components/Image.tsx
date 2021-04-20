@@ -187,7 +187,9 @@ const Image: React.FC = () => {
             }
         }
         if(playedCard!==null && cardNumber!==null){
-            if(cardNumber<cardNumber){
+            console.log(playedCard+"  "+cardNumber);
+            if(playedCard > cardNumber){
+            console.log("aaa");
                 dispatch({ type: 'INCREASESCORE' });
             }
         }

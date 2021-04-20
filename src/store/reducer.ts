@@ -67,14 +67,12 @@ const reducer = (state = initState, action: PayloadAction<number>) => {
             cards: obj.playCards(state.cards),
             playedCards: obj.playedCards,
             lastPlayedCard: obj.playedCards[obj.playedCards.length - 1],
-            score: 0,    //state.score + 1
         }
         case 'LOWERCLICKED': return {
             ...state,
             cards: obj.playCards(state.cards),
             playedCards: state.playedCards,
             lastPlayedCard: obj.playedCards[obj.playedCards.length - 1],
-            score: 0
         }
         case 'INCREASESCORE': return {
             ...state,
