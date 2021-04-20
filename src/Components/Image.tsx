@@ -76,10 +76,35 @@ const Image: React.FC = () => {
 
     function lowerClicked() {
         dispatch({ type: 'GAMESTARTED' });
+        if(numberOfPlyedCards===40){
+            dispatch({ type: 'CARDSFINISHED'});
+        }
+        setPlayedCard(cardNumber);
+        distributeCards();
+
+        if(playedCard!==null && cardNumber!==null){
+            if(playedCard > cardNumber){
+                dispatch({ type: 'INCREASESCORE' });
+            }
+        }
+    }
+
+    function higherClicked() {
+        dispatch({ type: 'GAMESTARTED' });
         if(numberOfPlyedCards==40){
             dispatch({ type: 'CARDSFINISHED'});
         }
         setPlayedCard(cardNumber);
+        distributeCards();
+
+        if(playedCard!==null && cardNumber!==null){
+            if(playedCard < cardNumber){
+                dispatch({ type: 'INCREASESCORE' });
+            }
+        }
+    }
+
+    function distributeCards(){
         if (cardNumber === 1) {
             if (cardSuit == 'spades') {
                 setSource(one_bs);
@@ -181,28 +206,22 @@ const Image: React.FC = () => {
                 setSource(ten_bc);
             }
         }
-        if(playedCard!==null && cardNumber!==null){
-            console.log(playedCard+"  "+cardNumber);
-            if(playedCard > cardNumber){
-                dispatch({ type: 'INCREASESCORE' });
-            }
-        }
     }
 
     return (
         <div>
             <img src={source} alt="alt house" height={500} width={300} />
             {/* old value */}
-            <p>card number: {cardNumber}</p>       
-            <p>card suit: {cardSuit} </p>
+            {/* <p>card number: {cardNumber}</p>       
+            <p>card suit: {cardSuit} </p> */}
             <p>number of played cards: {numberOfPlyedCards}</p>
             <p>score: {score}</p>
             {/* actual value */}
-            <p>playedCard: {playedCard}</p>     
+            {/* <p>playedCard: {playedCard}</p>      */}
             {/* <p>last played card: {lastPlayedCard}</p> */}
             <div>
                 <BUTTON onClick={lowerClicked}>Lower</BUTTON>
-                <BUTTON>Higher</BUTTON>
+                <BUTTON onClick={higherClicked}>Higher</BUTTON>
             </div>
         </div>
     );
