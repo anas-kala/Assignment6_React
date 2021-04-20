@@ -63,19 +63,28 @@ const BUTTON=styled.button`
 `;
 
 const Image: React.FC = () => {
-    const [source, setSource] = useState(one_bc);
+    const [source, setSource] = useState(one_bc);    
     const dispatch = useDispatch();
     const cardNumber = useSelector((state: AppState) => (state.lastPlayedCard !== null) ? state.lastPlayedCard.number : null);
+    const [playedCard,setPlayedCard]=useState(cardNumber);
     const cardSuit = useSelector((state: AppState) => (state.lastPlayedCard !== null) ? state.lastPlayedCard.suit : null);
     const numberOfPlyedCards = useSelector((state: AppState) => (state.playedCards !== null) ? state.playedCards.length : null);
     const score = useSelector((state: AppState) => (state.score !== null) ? state.score : null);
     // const lastPlayedCard=useSelector((state:AppState)=>(state.lastPlayedCard!=null?state.lastPlayedCard:null));
 
+    function settingCardNumber(a:number|null){
+        if(cardNumber!==null)
+        return cardNumber;
+        else
+        return 0;
+    }
     function lowerClicked() {
         dispatch({ type: 'GAMESTARTED' });
         if(numberOfPlyedCards==40){
             dispatch({ type: 'CARDSFINISHED'});
         }
+        let temp=cardNumber;
+        setPlayedCard(temp);
         if (cardNumber === 1) {
             if (cardSuit == 'spades') {
                 setSource(one_bs);
@@ -177,15 +186,23 @@ const Image: React.FC = () => {
                 setSource(ten_bc);
             }
         }
+        if(playedCard!==null && cardNumber!==null){
+            if(cardNumber<cardNumber){
+                dispatch({ type: 'INCREASESCORE' });
+            }
+        }
     }
 
     return (
         <div>
             <img src={source} alt="alt house" height={500} width={300} />
-            <p>card number: {cardNumber}</p>
+            {/* old value */}
+            <p>card number: {cardNumber}</p>       
             <p>card suit: {cardSuit} </p>
             <p>number of played cards: {numberOfPlyedCards}</p>
             <p>score: {score}</p>
+            {/* actual value */}
+            <p>playedCard: {playedCard}</p>     
             {/* <p>last played card: {lastPlayedCard}</p> */}
             <div>
                 <BUTTON onClick={lowerClicked}>Lower</BUTTON>
